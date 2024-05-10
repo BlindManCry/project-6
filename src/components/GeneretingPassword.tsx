@@ -2,8 +2,11 @@ import styled from "styled-components";
 import ChooseStrength from "./ChooseStrength";
 import ForceCalculation from "./ForceCalculation";
 import ArrowRight from "/images/icon-arrow-right.svg";
+import ArrowRightHover from "/images/icon-arrow-right-hover.svg";
+import { useState } from "react";
 
 export default function GeneretingPassword() {
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <StyledGeneretingPassword>
       <LengthCounter>
@@ -13,9 +16,16 @@ export default function GeneretingPassword() {
       <input type="range" min={8} max={20} />
       <ChooseStrength />
       <ForceCalculation />
-      <GenerateButton>
+      <GenerateButton
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <span>GENERATE</span>
-        <img src={ArrowRight} alt="arrow-right-icon" />
+        {!isHovered ? (
+          <img src={ArrowRight} alt="arrow-right-icon" />
+        ) : (
+          <img src={ArrowRightHover} alt="arrow-right-icon" />
+        )}
       </GenerateButton>
     </StyledGeneretingPassword>
   );
@@ -30,6 +40,13 @@ const StyledGeneretingPassword = styled.div`
     width: 100%;
     margin-top: 1.6rem;
     accent-color: #a4ffaf;
+    background-image: linear-gradient(
+      to right,
+      #a4ffaf 0%,
+      #a4ffaf 100%,
+      #18171f 100%,
+      #18171f 100%
+    );
   }
 
   @media only screen and (min-width: 768px) {
@@ -84,6 +101,8 @@ const GenerateButton = styled.button`
   gap: 1.6rem;
   margin-top: 1.6rem;
   font-family: inherit;
+  transition: all 0.3s;
+  cursor: pointer;
 
   & > span {
     font-size: 1.6rem;
@@ -99,6 +118,15 @@ const GenerateButton = styled.button`
     & > span {
       font-size: 1.8rem;
       line-height: 2.376rem;
+    }
+  }
+
+  &:hover {
+    outline: 2px solid #a4ffaf;
+    background: #24232c;
+
+    & > span {
+      color: #a4ffaf;
     }
   }
 `;

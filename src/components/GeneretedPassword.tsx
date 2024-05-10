@@ -1,11 +1,27 @@
 import styled from "styled-components";
 import copyIcon from "/images/icon-copy.svg";
+import copyHoverIcon from "/images/icon-copy-hover.svg";
+import { useState } from "react";
 
 export default function GeneretedPassword() {
+  const [isCopyHovered, setIsCopyHoverd] = useState<boolean>(false);
+
   return (
     <StyledGeneretedPassword>
-      <p>PTx1f5DaFX</p>
-      <img src={copyIcon} alt="copy icon" />
+      <p>P4$5W0rD!</p>
+      {!isCopyHovered ? (
+        <img
+          src={copyIcon}
+          alt="copy icon"
+          onMouseEnter={() => setIsCopyHoverd(true)}
+        />
+      ) : (
+        <img
+          src={copyHoverIcon}
+          alt="copy icon"
+          onMouseLeave={() => setIsCopyHoverd(false)}
+        />
+      )}
     </StyledGeneretedPassword>
   );
 }
@@ -20,16 +36,17 @@ const StyledGeneretedPassword = styled.div`
   align-items: center;
 
   & > p {
-    font-family: JetBrains Mono;
-    font-size: 2.4rem;
+    font-size: 3.2rem;
     font-weight: 700;
-    line-height: 3.168rem;
+    line-height: 4.224rem;
     color: #e6e5ea;
+    opacity: 25%;
   }
 
   & > img {
     width: 1.75rem;
     width: 2rem;
+    cursor: pointer;
   }
 
   @media only screen and (min-width: 768px) {
