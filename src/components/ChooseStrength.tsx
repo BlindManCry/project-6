@@ -17,4 +17,8 @@ const StyledChoosenStrength = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+
+  @media only screen and (min-width: 768px) {
+    gap: 2rem;
+  }
 `;

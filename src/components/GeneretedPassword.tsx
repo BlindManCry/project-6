@@ -24,10 +24,26 @@ const StyledGeneretedPassword = styled.div`
     font-size: 2.4rem;
     font-weight: 700;
     line-height: 3.168rem;
+    color: #e6e5ea;
   }
 
   & > img {
     width: 1.75rem;
     width: 2rem;
+  }
+
+  @media only screen and (min-width: 768px) {
+    padding: 1.9rem 3.2rem;
+    margin-top: 3.1rem;
+
+    & > p {
+      font-size: 3.2rem;
+      line-height: 4.224rem;
+    }
+
+    & > img {
+      width: 2.1rem;
+      height: 2.4rem;
+    }
   }
 `;

@@ -32,6 +32,15 @@ const StyledForceCalculation = styled.div`
     line-height: 2.112rem;
     color: #817d92;
   }
+
+  @media only screen and (min-width: 768px) {
+    padding: 2.1rem 3.15rem 2rem 3.2rem;
+
+    & > p {
+      font-size: 1.8rem;
+      line-height: 2.376rem;
+    }
+  }
 `;
 
 const CalculationOutput = styled.div`
@@ -43,6 +52,15 @@ const CalculationOutput = styled.div`
     font-weight: 700;
     line-height: 2.376rem;
     color: #e6e5ea;
+  }
+
+  @media only screen and (min-width: 768px) {
+    gap: 1.55rem;
+
+    & > h2 {
+      font-size: 2.4rem;
+      line-height: 3.168rem;
+    }
   }
 `;
 

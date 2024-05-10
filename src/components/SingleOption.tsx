@@ -27,6 +27,16 @@ const StyledSingleOption = styled.div`
     line-height: 2.112rem;
     color: #e6e5ea;
   }
+
+  @media only screen and (min-width: 768px) {
+    gap: 2.4rem;
+
+    & > p {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 2.376rem;
+    }
+  }
 `;
 
 const CheckBox = styled.div`

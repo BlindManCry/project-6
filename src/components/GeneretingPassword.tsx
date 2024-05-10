@@ -31,6 +31,11 @@ const StyledGeneretingPassword = styled.div`
     margin-top: 1.6rem;
     accent-color: #a4ffaf;
   }
+
+  @media only screen and (min-width: 768px) {
+    margin-top: 2.4rem;
+    padding: 2.4rem 3.2rem 3.2rem 3.2rem;
+  }
 `;
 
 const LengthCounter = styled.div`
@@ -42,6 +47,7 @@ const LengthCounter = styled.div`
     font-size: 1.6rem;
     font-weight: 700;
     line-height: 2.112rem;
+    color: #e6e5ea;
   }
 
   & > span {
@@ -49,6 +55,20 @@ const LengthCounter = styled.div`
     font-weight: 700;
     line-height: 3.168rem;
     color: #a4ffaf;
+  }
+
+  @media only screen and (min-width: 768px) {
+    & > p {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 2.376rem;
+    }
+
+    & > span {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 4.224rem;
+    }
   }
 `;
 
@@ -63,11 +83,22 @@ const GenerateButton = styled.button`
   align-items: center;
   gap: 1.6rem;
   margin-top: 1.6rem;
+  font-family: inherit;
 
   & > span {
     font-size: 1.6rem;
     font-weight: 700;
     line-height: 2.112rem;
     color: #24232c;
+  }
+
+  @media only screen and (min-width: 768px) {
+    margin-top: 3.2rem;
+    padding: 2.1rem 0rem 2.1rem 0rem;
+
+    & > span {
+      font-size: 1.8rem;
+      line-height: 2.376rem;
+    }
   }
 `;
