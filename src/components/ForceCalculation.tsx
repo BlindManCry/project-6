@@ -1,17 +1,16 @@
 import styled from "styled-components";
+import { useGenerator } from "../context/GeneratorContext";
+import RenderPasswordSttrength from "./RenderPasswordSttrength";
 
 export default function ForceCalculation() {
+  const { passwordStrength } = useGenerator();
+
   return (
     <StyledForceCalculation>
       <p>STRENGTH</p>
       <CalculationOutput>
-        <h2>MEDIUM</h2>
-        <StrengthProgress>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </StrengthProgress>
+        {passwordStrength !== "none" ? <h2>{passwordStrength}</h2> : <h2></h2>}
+        <RenderPasswordSttrength />
       </CalculationOutput>
     </StyledForceCalculation>
   );
@@ -52,6 +51,7 @@ const CalculationOutput = styled.div`
     font-weight: 700;
     line-height: 2.376rem;
     color: #e6e5ea;
+    text-transform: uppercase;
   }
 
   @media only screen and (min-width: 768px) {
@@ -61,17 +61,5 @@ const CalculationOutput = styled.div`
       font-size: 2.4rem;
       line-height: 3.168rem;
     }
-  }
-`;
-
-const StrengthProgress = styled.div`
-  display: flex;
-  gap: 0.8rem;
-
-  & > div {
-    width: 1rem;
-    height: 2.8rem;
-    background: #f8cd65;
-    /* border: 2px solid #e6e5ea; */
   }
 `;

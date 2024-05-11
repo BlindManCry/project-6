@@ -5,6 +5,8 @@ interface GeneratorContextType {
   setPasswordLength: React.Dispatch<React.SetStateAction<number>>;
   passwordStrength: string;
   setPasswordStrength: React.Dispatch<React.SetStateAction<string>>;
+  checkboxCounter: number;
+  setCheckboxCounter: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const initialContextValue: GeneratorContextType = {
@@ -12,6 +14,8 @@ const initialContextValue: GeneratorContextType = {
   setPasswordLength: () => {},
   passwordStrength: "",
   setPasswordStrength: () => {},
+  checkboxCounter: 0,
+  setCheckboxCounter: () => {},
 };
 
 interface GeneratorProviderProps {
@@ -24,6 +28,7 @@ const GeneratorContext =
 function GeneratorProvider({ children }: GeneratorProviderProps) {
   const [passwordLength, setPasswordLength] = useState<number>(8);
   const [passwordStrength, setPasswordStrength] = useState<string>("");
+  const [checkboxCounter, setCheckboxCounter] = useState<number>(0);
 
   return (
     <GeneratorContext.Provider
@@ -32,6 +37,8 @@ function GeneratorProvider({ children }: GeneratorProviderProps) {
         setPasswordLength,
         passwordStrength,
         setPasswordStrength,
+        checkboxCounter,
+        setCheckboxCounter,
       }}
     >
       {children}

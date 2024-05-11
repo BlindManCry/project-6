@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import SingleOption from "./SingleOption";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useGenerator } from "../context/GeneratorContext";
 
 export default function ChooseStrength() {
-  const [checkboxCounter, setCheckboxCounter] = useState<number>(0);
-
-  const { setPasswordStrength } = useGenerator();
+  const { setPasswordStrength, checkboxCounter, setCheckboxCounter } =
+    useGenerator();
 
   useEffect(() => {
     if (checkboxCounter === 1) {
@@ -17,6 +16,8 @@ export default function ChooseStrength() {
       setPasswordStrength("medium");
     } else if (checkboxCounter === 4) {
       setPasswordStrength("strong");
+    } else if (checkboxCounter === 0) {
+      setPasswordStrength("none");
     }
   }, [checkboxCounter, setPasswordStrength]);
 
