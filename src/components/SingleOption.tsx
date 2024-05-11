@@ -1,16 +1,40 @@
 import styled from "styled-components";
 import checkIcon from "/images/icon-check.svg";
+import { useState } from "react";
 
 type SingleOptionProps = {
   optiontext: string;
+  currentOption: string;
+  setCheckboxCounter: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export default function SingleOption({ optiontext }: SingleOptionProps) {
+export default function SingleOption({
+  optiontext,
+  currentOption,
+  setCheckboxCounter,
+}: SingleOptionProps) {
+  const [isChecked, setIsChecked] = useState<string>("");
+
+  const handleUnCheck = () => {
+    setIsChecked("");
+    setCheckboxCounter((count: number) => count - 1);
+  };
+
+  const handleCheck = () => {
+    setIsChecked(currentOption);
+    setCheckboxCounter((count: number) => count + 1);
+  };
+
   return (
     <StyledSingleOption>
-      <CheckBox>
-        <img src={checkIcon} alt="check-icon" />
-      </CheckBox>
+      {isChecked === currentOption ? (
+        <CheckBox onClick={handleUnCheck}>
+          <img src={checkIcon} alt="check-icon" />
+        </CheckBox>
+      ) : (
+        <EmptyCheckbox onClick={handleCheck}></EmptyCheckbox>
+      )}
+
       <p>{optiontext}</p>
     </StyledSingleOption>
   );
@@ -46,4 +70,12 @@ const CheckBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+`;
+
+const EmptyCheckbox = styled.div`
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid #e6e5ea;
+  cursor: pointer;
 `;

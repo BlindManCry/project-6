@@ -4,16 +4,31 @@ import ForceCalculation from "./ForceCalculation";
 import ArrowRight from "/images/icon-arrow-right.svg";
 import ArrowRightHover from "/images/icon-arrow-right-hover.svg";
 import { useState } from "react";
+import { useGenerator } from "../context/GeneratorContext";
 
 export default function GeneretingPassword() {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+
+  const { passwordLength, setPasswordLength } = useGenerator();
+
+  const handleLengthChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const newValue = parseInt(e.target.value);
+    setPasswordLength(newValue);
+  };
+
   return (
     <StyledGeneretingPassword>
       <LengthCounter>
         <p>Character Length</p>
-        <span>10</span>
+        <span>{passwordLength}</span>
       </LengthCounter>
-      <input type="range" min={8} max={20} />
+      <input
+        type="range"
+        min={8}
+        max={20}
+        value={passwordLength}
+        onChange={handleLengthChange}
+      />
       <ChooseStrength />
       <ForceCalculation />
       <GenerateButton
