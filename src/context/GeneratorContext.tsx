@@ -7,6 +7,16 @@ interface GeneratorContextType {
   setPasswordStrength: React.Dispatch<React.SetStateAction<string>>;
   checkboxCounter: number;
   setCheckboxCounter: React.Dispatch<React.SetStateAction<number>>;
+  isInclude: string[];
+  setIsInclude: React.Dispatch<React.SetStateAction<string[]>>;
+  chosenIndexes: number[];
+  setChoosenIndexes: React.Dispatch<React.SetStateAction<number[]>>;
+  generetedPassword: string;
+  setGeneretedPassword: React.Dispatch<React.SetStateAction<string>>;
+  isPasswordGenereted: boolean;
+  setIsPasswordGenereted: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const initialContextValue: GeneratorContextType = {
@@ -16,6 +26,16 @@ const initialContextValue: GeneratorContextType = {
   setPasswordStrength: () => {},
   checkboxCounter: 0,
   setCheckboxCounter: () => {},
+  isInclude: [],
+  setIsInclude: () => {},
+  chosenIndexes: [],
+  setChoosenIndexes: () => {},
+  generetedPassword: "",
+  setGeneretedPassword: () => {},
+  isPasswordGenereted: false,
+  setIsPasswordGenereted: () => {},
+  isLoading: false,
+  setIsLoading: () => {},
 };
 
 interface GeneratorProviderProps {
@@ -29,6 +49,12 @@ function GeneratorProvider({ children }: GeneratorProviderProps) {
   const [passwordLength, setPasswordLength] = useState<number>(8);
   const [passwordStrength, setPasswordStrength] = useState<string>("");
   const [checkboxCounter, setCheckboxCounter] = useState<number>(0);
+  const [isInclude, setIsInclude] = useState<string[]>([]);
+  const [chosenIndexes, setChoosenIndexes] = useState<number[]>([]);
+  const [generetedPassword, setGeneretedPassword] = useState<string>("");
+  const [isPasswordGenereted, setIsPasswordGenereted] =
+    useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
     <GeneratorContext.Provider
@@ -39,6 +65,16 @@ function GeneratorProvider({ children }: GeneratorProviderProps) {
         setPasswordStrength,
         checkboxCounter,
         setCheckboxCounter,
+        isInclude,
+        setIsInclude,
+        chosenIndexes,
+        setChoosenIndexes,
+        generetedPassword,
+        setGeneretedPassword,
+        isPasswordGenereted,
+        setIsPasswordGenereted,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}

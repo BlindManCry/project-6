@@ -1,28 +1,41 @@
 import styled from "styled-components";
 import checkIcon from "/images/icon-check.svg";
 import { useState } from "react";
+import { useGenerator } from "../context/GeneratorContext";
 
 type SingleOptionProps = {
   optiontext: string;
   currentOption: string;
   setCheckboxCounter: React.Dispatch<React.SetStateAction<number>>;
+  index: number;
 };
 
 export default function SingleOption({
   optiontext,
   currentOption,
   setCheckboxCounter,
+  index,
 }: SingleOptionProps) {
   const [isChecked, setIsChecked] = useState<string>("");
+
+  const { setIsInclude, setChoosenIndexes } = useGenerator();
 
   const handleUnCheck = () => {
     setIsChecked("");
     setCheckboxCounter((count: number) => count - 1);
+    setIsInclude((include: string[]) =>
+      include.filter((option) => option !== currentOption)
+    );
+    setChoosenIndexes((curIndex: number[]) =>
+      curIndex.filter((item) => item !== index)
+    );
   };
 
   const handleCheck = () => {
     setIsChecked(currentOption);
     setCheckboxCounter((count: number) => count + 1);
+    setIsInclude((include: string[]) => [...include, currentOption]);
+    setChoosenIndexes((curIndex: number[]) => [...curIndex, index]);
   };
 
   return (

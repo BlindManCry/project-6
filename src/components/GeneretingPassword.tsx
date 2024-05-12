@@ -5,15 +5,120 @@ import ArrowRight from "/images/icon-arrow-right.svg";
 import ArrowRightHover from "/images/icon-arrow-right-hover.svg";
 import { useState } from "react";
 import { useGenerator } from "../context/GeneratorContext";
+import {
+  lowercaseArr,
+  numbersArr,
+  shuffleArray,
+  symbolsArr,
+  uppercaseArr,
+} from "../helper functions/GeneretePassword";
 
 export default function GeneretingPassword() {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
-  const { passwordLength, setPasswordLength } = useGenerator();
+  const {
+    passwordLength,
+    setPasswordLength,
+    checkboxCounter,
+    chosenIndexes,
+    setGeneretedPassword,
+    setIsPasswordGenereted,
+    setIsLoading,
+  } = useGenerator();
 
   const handleLengthChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const newValue = parseInt(e.target.value);
     setPasswordLength(newValue);
+  };
+
+  // password generator main function
+  const handleGeneretePassword = async () => {
+    setIsLoading(true);
+    // this is just for design
+    const delay = (ms: number) =>
+      new Promise((resolve) => setTimeout(resolve, ms));
+    await delay(3000);
+
+    setGeneretedPassword("");
+    const arrayOfArrays = [uppercaseArr, lowercaseArr, numbersArr, symbolsArr];
+
+    const singleTypeLength = Math.floor(passwordLength / checkboxCounter);
+
+    const singleTypeRemainder = passwordLength % checkboxCounter;
+
+    let firtsArr: string[] = [];
+    let secondArr: string[] = [];
+    let thirdArr: string[] = [];
+    let fourthArr: string[] = [];
+
+    chosenIndexes.sort((a, b) => a - b);
+
+    firtsArr = arrayOfArrays[chosenIndexes[0]];
+    secondArr = arrayOfArrays[chosenIndexes[1]];
+    thirdArr = arrayOfArrays[chosenIndexes[2]];
+    fourthArr = arrayOfArrays[chosenIndexes[3]];
+
+    const generetedPasswordLetters: string[] = [];
+
+    if (firtsArr) {
+      for (let i = 0; i < singleTypeLength; i++) {
+        const randomPasswordIndex = Math.floor(Math.random() * firtsArr.length);
+        generetedPasswordLetters.push(firtsArr[randomPasswordIndex]);
+      }
+    }
+
+    if (secondArr) {
+      for (let i = 0; i < singleTypeLength; i++) {
+        const randomPasswordIndex = Math.floor(
+          Math.random() * secondArr.length
+        );
+        generetedPasswordLetters.push(secondArr[randomPasswordIndex]);
+      }
+    }
+
+    if (thirdArr) {
+      for (let i = 0; i < singleTypeLength; i++) {
+        const randomPasswordIndex = Math.floor(Math.random() * thirdArr.length);
+        generetedPasswordLetters.push(thirdArr[randomPasswordIndex]);
+      }
+    }
+
+    if (fourthArr) {
+      for (let i = 0; i < singleTypeLength; i++) {
+        const randomPasswordIndex = Math.floor(
+          Math.random() * fourthArr.length
+        );
+        generetedPasswordLetters.push(fourthArr[randomPasswordIndex]);
+      }
+    }
+
+    const allLettersInOne = [firtsArr, secondArr, thirdArr, fourthArr];
+
+    const passwordElementsInOne: string[] = [];
+    if (singleTypeRemainder !== 0) {
+      for (let i = 0; i < checkboxCounter; i++) {
+        passwordElementsInOne.push(...allLettersInOne[i]);
+      }
+
+      for (let i = 0; i < singleTypeRemainder; i++) {
+        const randomPasswordIndex = Math.floor(
+          Math.random() * passwordElementsInOne.length
+        );
+        generetedPasswordLetters.push(
+          passwordElementsInOne[randomPasswordIndex]
+        );
+      }
+    }
+
+    const passwordLettersRandomize = shuffleArray(generetedPasswordLetters);
+
+    for (let i = 0; i < passwordLettersRandomize.length; i++) {
+      setGeneretedPassword(
+        (password) => (password += passwordLettersRandomize[i])
+      );
+    }
+    setIsPasswordGenereted(true);
+    setIsLoading(false);
   };
 
   return (
@@ -34,6 +139,8 @@ export default function GeneretingPassword() {
       <GenerateButton
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        onClick={handleGeneretePassword}
+        disabled={checkboxCounter === 0}
       >
         <span>GENERATE</span>
         {!isHovered ? (

@@ -27,21 +27,25 @@ export default function ChooseStrength() {
         optiontext="Include Uppercase Letters"
         currentOption="uppercase"
         setCheckboxCounter={setCheckboxCounter}
+        index={0}
       />
       <SingleOption
         optiontext="Include Lowercase Letters"
         currentOption="lowercase"
         setCheckboxCounter={setCheckboxCounter}
+        index={1}
       />
       <SingleOption
         optiontext="Include Numbers"
         currentOption="numbers"
         setCheckboxCounter={setCheckboxCounter}
+        index={2}
       />
       <SingleOption
         optiontext="Include Symbols"
         currentOption="symbols"
         setCheckboxCounter={setCheckboxCounter}
+        index={3}
       />
     </StyledChoosenStrength>
   );
