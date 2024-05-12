@@ -135,7 +135,7 @@ export default function GeneretingPassword() {
       <input
         type="range"
         min={8}
-        max={20}
+        max={15}
         value={passwordLength}
         onChange={handleLengthChange}
       />

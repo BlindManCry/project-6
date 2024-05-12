@@ -101,23 +101,28 @@ const CopyDiv = styled.div`
   gap: 1.6rem;
   align-items: center;
 
-  & > p {
-    font-size: 1.8rem;
-    font-weight: 700;
-    line-height: 2.376rem;
-    color: #a4ffaf;
-  }
-
   & > img {
     width: 1.75rem;
     width: 2rem;
     cursor: pointer;
   }
 
+  & > p {
+    display: none;
+  }
+
   @media only screen and (min-width: 768px) {
     & > img {
       width: 2.1rem;
       height: 2.4rem;
+    }
+
+    & > p {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 2.376rem;
+      color: #a4ffaf;
     }
   }
 `;
