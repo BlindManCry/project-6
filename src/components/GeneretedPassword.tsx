@@ -7,10 +7,18 @@ import { useGenerator } from "../context/GeneratorContext";
 export default function GeneretedPassword() {
   const [isCopyHovered, setIsCopyHoverd] = useState<boolean>(false);
 
-  const { isPasswordGenereted, generetedPassword, isLoading } = useGenerator();
+  const {
+    isPasswordGenereted,
+    generetedPassword,
+    isLoading,
+    setIsTextCopied,
+    isTextCopied,
+  } = useGenerator();
 
   const handleCopy = () => {
+    if (generetedPassword === "") return;
     navigator.clipboard.writeText(generetedPassword);
+    setIsTextCopied(true);
   };
 
   return (
@@ -24,6 +32,7 @@ export default function GeneretedPassword() {
       )}
 
       <CopyDiv>
+        {isTextCopied && <p>Copied</p>}
         {!isCopyHovered ? (
           <img
             src={copyIcon}
@@ -88,6 +97,17 @@ const LoadingText = styled.p`
 `;
 
 const CopyDiv = styled.div`
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+
+  & > p {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 2.376rem;
+    color: #a4ffaf;
+  }
+
   & > img {
     width: 1.75rem;
     width: 2rem;

@@ -24,6 +24,8 @@ export default function GeneretingPassword() {
     setGeneretedPassword,
     setIsPasswordGenereted,
     setIsLoading,
+    setIsTextCopied,
+    isLoading,
   } = useGenerator();
 
   const handleLengthChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -34,6 +36,9 @@ export default function GeneretingPassword() {
   // password generator main function
   const handleGeneretePassword = async () => {
     setIsLoading(true);
+    setIsTextCopied(false);
+
+    if (isLoading) return;
     // this is just for design
     const delay = (ms: number) =>
       new Promise((resolve) => setTimeout(resolve, ms));

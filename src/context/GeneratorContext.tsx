@@ -17,6 +17,8 @@ interface GeneratorContextType {
   setIsPasswordGenereted: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  isTextCopied: boolean;
+  setIsTextCopied: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const initialContextValue: GeneratorContextType = {
@@ -36,6 +38,8 @@ const initialContextValue: GeneratorContextType = {
   setIsPasswordGenereted: () => {},
   isLoading: false,
   setIsLoading: () => {},
+  isTextCopied: false,
+  setIsTextCopied: () => {},
 };
 
 interface GeneratorProviderProps {
@@ -55,6 +59,7 @@ function GeneratorProvider({ children }: GeneratorProviderProps) {
   const [isPasswordGenereted, setIsPasswordGenereted] =
     useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isTextCopied, setIsTextCopied] = useState<boolean>(false);
 
   return (
     <GeneratorContext.Provider
@@ -75,6 +80,8 @@ function GeneratorProvider({ children }: GeneratorProviderProps) {
         setIsPasswordGenereted,
         isLoading,
         setIsLoading,
+        isTextCopied,
+        setIsTextCopied,
       }}
     >
       {children}
