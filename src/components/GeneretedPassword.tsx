@@ -38,6 +38,7 @@ export default function GeneretedPassword() {
             src={copyIcon}
             alt="copy icon"
             onMouseEnter={() => setIsCopyHoverd(true)}
+            onClick={handleCopy}
           />
         ) : (
           <img
