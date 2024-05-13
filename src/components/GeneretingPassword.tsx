@@ -28,6 +28,8 @@ export default function GeneretingPassword() {
     isLoading,
   } = useGenerator();
 
+  const rangePercent = (((passwordLength - 8) * 2 + 0.2) * 100) / 15;
+
   const handleLengthChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const newValue = parseInt(e.target.value);
     setPasswordLength(newValue);
@@ -127,7 +129,7 @@ export default function GeneretingPassword() {
   };
 
   return (
-    <StyledGeneretingPassword>
+    <StyledGeneretingPassword rangePercent={rangePercent}>
       <LengthCounter>
         <p>Character Length</p>
         <span>{passwordLength}</span>
@@ -158,7 +160,7 @@ export default function GeneretingPassword() {
   );
 }
 
-const StyledGeneretingPassword = styled.div`
+const StyledGeneretingPassword = styled.div<{ rangePercent: number }>`
   margin-top: 1.6rem;
   padding: 1.6rem;
   background: #24232c;
@@ -166,14 +168,23 @@ const StyledGeneretingPassword = styled.div`
   & > input {
     width: 100%;
     margin-top: 1.6rem;
-    accent-color: #a4ffaf;
+    appearance: none;
+    height: 0.8rem;
     background-image: linear-gradient(
       to right,
       #a4ffaf 0%,
-      #a4ffaf 100%,
-      #18171f 100%,
+      #a4ffaf ${(props) => props.rangePercent}%,
+      #18171f ${(props) => props.rangePercent}%,
       #18171f 100%
     );
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 2.8rem;
+    height: 2.8rem;
+    background: #e6e5ea;
+    border-radius: 50%;
   }
 
   @media only screen and (min-width: 768px) {
